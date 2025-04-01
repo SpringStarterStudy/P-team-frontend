@@ -1,4 +1,6 @@
 export default defineNuxtConfig({
+  css: ['vuetify/styles'],
+
   build: {
     transpile: ['vuetify'],
   },
@@ -6,15 +8,19 @@ export default defineNuxtConfig({
   vite: {
     define: {
       'process.env.DEBUG': false,
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@use "@/assets/style/common.scss" as *;'
-        }
-      }
     }
   },
 
-  compatibilityDate: '2025-03-30',
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css'
+        }
+      ]
+    }
+  },
+
+  compatibilityDate: '2025-04-01'
 })
