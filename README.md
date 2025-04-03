@@ -1,6 +1,6 @@
 
 
-# 🚀 Nuxt3 Minimal Frontend Starter
+# 🚀 Nuxt3 P-Team Frontend
 
 
 👉 [📘 Nuxt 공식 문서 바로가기](https://nuxt.com/docs/getting-started/introduction)
