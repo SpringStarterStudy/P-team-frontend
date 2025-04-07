@@ -1,9 +1,12 @@
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineNuxtConfig({
-  css: ['vuetify/styles'],
+  css: ['vuetify/styles','~/assets/css/main.css',],
 
   devtools: {
     enabled: false
   },
+
   build: {
     transpile: ['vuetify'],
   },
@@ -11,7 +14,10 @@ export default defineNuxtConfig({
   vite: {
     define: {
       'process.env.DEBUG': false,
-    }
+    },
+    plugins: [
+      tailwindcss(),
+    ],
   },
 
   app: {
@@ -25,7 +31,19 @@ export default defineNuxtConfig({
           rel: 'stylesheet',
           href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css'
         }
+      ],
+      script: [
+        {
+          src: `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.PUBLIC_NAVER_MAP_CLIENT_ID}`,
+          defer: true
+        }
       ]
+    }
+  },
+
+  runtimeConfig: {
+    public: {
+      naverMapClientId: process.env.PUBLIC_NAVER_MAP_CLIENT_ID
     }
   },
 
