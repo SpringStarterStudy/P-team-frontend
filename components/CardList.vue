@@ -1,15 +1,14 @@
 <script setup>
-import { ref } from 'vue'
-
 const snackbar = ref(false);
-const text = ref('');
+const text = ref("");
+const router = useRouter();
 
-const explore = () => {
-  alert("상세보기 클릭됨!");
+const explore = (id) => {
+  router.push(`/detail/${id}`);
 };
 
 const likeClickHandler = () => {
-  text.value = '즐겨찾기에 추가되었습니다';
+  text.value = "즐겨찾기에 추가되었습니다";
   snackbar.value = true;
 };
 </script>
@@ -34,10 +33,7 @@ const likeClickHandler = () => {
         >
           <template v-slot:placeholder>
             <div class="d-flex align-center justify-center fill-height">
-              <v-progress-circular
-                color="grey-lighten-4"
-                indeterminate
-              />
+              <v-progress-circular color="grey-lighten-4" indeterminate />
             </div>
           </template>
         </v-img>
@@ -55,19 +51,22 @@ const likeClickHandler = () => {
               size="x-small"
               color="#8D64DE"
               text-color="white"
-            >#헬스</v-chip>
+              >#헬스</v-chip
+            >
             <v-chip
               class="rounded-pill mr-2"
               size="x-small"
               color="#8D64DE"
               text-color="white"
-            >#요가</v-chip>
+              >#요가</v-chip
+            >
             <v-chip
               class="rounded-pill mr-2"
               size="x-small"
               color="#8D64DE"
               text-color="white"
-            >#PT</v-chip>
+              >#PT</v-chip
+            >
           </div>
 
           <h3 class="mb-2 card-title">pt 전문 트레이너입니다.</h3>
@@ -90,7 +89,7 @@ const likeClickHandler = () => {
               color="#8D64DE"
               size="small"
               class="w-75 pl-5 mr-2"
-              @click.stop="explore"
+              @click.stop="explore(1)"
             >
               상세보기
             </v-btn>
@@ -108,7 +107,7 @@ const likeClickHandler = () => {
     </v-row>
   </v-card>
 
-  <v-snackbar v-model="snackbar" multi-line :timeout="1500" >
+  <v-snackbar v-model="snackbar" multi-line :timeout="1500">
     {{ text }}
     <template v-slot:actions>
       <v-btn color="red" variant="text" @click="snackbar = false">
@@ -120,7 +119,7 @@ const likeClickHandler = () => {
 
 <style scoped>
 .custom-border {
-  border: 2px solid #E4E4E7 !important;
+  border: 2px solid #e4e4e7 !important;
 }
 .card-title {
   font-size: 13px;
