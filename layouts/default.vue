@@ -1,9 +1,7 @@
 <template>
-  <v-app>
-    <v-main>
-      <NuxtPage />
-    </v-main>
-    <v-bottom-navigation app height="64">
+  <v-main class="main-scroll-area">
+    <NuxtPage />
+    <v-bottom-navigation class="bottom-fixed" height="64">
       <v-btn to="/" stacked>
         <v-icon>mdi-home</v-icon>
         <span class="text-caption">홈</span>
@@ -25,5 +23,25 @@
         <span class="text-caption">피드</span>
       </v-btn>
     </v-bottom-navigation>
-  </v-app>
+  </v-main>
 </template>
+
+<style scoped>
+.main-scroll-area {
+  padding-top: 80px; 
+  padding-bottom: 80px; 
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.bottom-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background-color: white;
+  z-index: 999;
+  border-top: 1px solid #eee;
+}
+</style>
