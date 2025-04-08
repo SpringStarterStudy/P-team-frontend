@@ -1,5 +1,4 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
 const router = useRouter();
 
 const props = defineProps({
@@ -7,22 +6,29 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  backIcon: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const isAlertOpen = ref(false);
-const alertRef = ref(null); // 알림창 영역 ref
+const alertRef = ref(null);
+
+const isLoggedIn = ref(true);
 
 const loginHandler = () => {
   router.push("/login");
-  console.log("click login icon");
+};
+
+const mypageHandler = () => {
+  router.push("/mypage");
 };
 
 const alertHandler = () => {
   isAlertOpen.value = !isAlertOpen.value;
-  console.log("click alert icon");
 };
 
-// 바깥 클릭 시 알림창 닫기
 const handleClickOutside = (event) => {
   if (alertRef.value && !alertRef.value.contains(event.target)) {
     isAlertOpen.value = false;
@@ -37,7 +43,6 @@ onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
-// 예시 알림 목록
 const alerts = [
   { id: 1, title: "Ideas you've been eyeing", time: "9h", img: "/sample1.png" },
   { id: 2, title: "Inspired by you", time: "17h", img: "/sample2.png" },
@@ -46,18 +51,45 @@ const alerts = [
 </script>
 
 <template>
-  <v-container
-    class="d-flex align-center justify-space-between"
-    style="height: 80px; position: relative"
-  >
+  <v-container class="logo-fixed d-flex align-center justify-space-between">
+    <div style="width: 50px; text-align: left;">
+      <v-btn
+        v-if="props.backIcon"
+        icon
+        variant="text"
+        size="small"
+        @click="$router.back()"
+        style="min-width: 36px;"
+      >
+        <v-icon color="#8D64DE" size="30">mdi-chevron-left</v-icon>
+      </v-btn>
+    </div>
+
     <div class="mx-auto">
       <v-img src="/images/logo.png" style="width: 200px; height: auto" cover />
     </div>
-
     <div class="d-flex" style="gap: 10px" v-if="!props.noIcons">
-      <v-icon class="mr-2" color="#8D64DE" @click="loginHandler"
-        >mdi-login</v-icon
-      >
+      <template v-if="!isLoggedIn">
+        <v-icon class="mr-2" color="#8D64DE" @click="loginHandler">
+          mdi-login
+        </v-icon>
+      </template>
+      <template v-else>
+        <v-tooltip text="마이페이지" location="bottom">
+          <template #activator="{ props }">
+            <v-icon
+              v-bind="props"
+              class="mr-2 pb-2"
+              color="#8D64DE"
+              @click="mypageHandler"
+              style="cursor: pointer"
+              size="30"
+            >
+              mdi-account
+            </v-icon>
+          </template>
+        </v-tooltip>
+      </template>
 
       <div ref="alertRef" style="position: relative">
         <v-badge color="error" dot>
@@ -89,7 +121,7 @@ const alerts = [
                     <v-img
                       alt="John"
                       src="https://cdn.vuetifyjs.com/images/john.jpg"
-                    ></v-img>
+                    />
                   </v-avatar>
                 </template>
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -102,3 +134,16 @@ const alerts = [
     </div>
   </v-container>
 </template>
+
+<style scoped>
+.logo-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: white;
+  z-index: 1000;
+  border-bottom: 1px solid #eee;
+}
+</style>
