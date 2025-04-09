@@ -51,13 +51,14 @@ const alerts = [
 </script>
 
 <template>
-  <v-container class="logo-fixed d-flex align-center justify-space-between">
+  <v-container class="logo-fixed d-flex align-center justify-space-between mr-5 pt-12">
     <div style="width: 50px; text-align: left;">
       <v-btn
         v-if="props.backIcon"
         icon
         variant="text"
         size="small"
+        class="ml-3"
         @click="$router.back()"
         style="min-width: 36px;"
       >
@@ -138,12 +139,13 @@ const alerts = [
 <style scoped>
 .logo-fixed {
   position: fixed;
-  top: 0;
+  top: 0; 
   left: 0;
   right: 0;
-  height: 80px;
+  height: 100px;
   background-color: white;
   z-index: 1000;
   border-bottom: 1px solid #eee;
 }
+
 </style>
