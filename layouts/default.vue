@@ -1,6 +1,6 @@
 <template>
   <v-main class="main-scroll-area">
-    <NuxtPage />
+    <NuxtPage class="mt-5"/>
     <v-bottom-navigation class="bottom-fixed" height="64">
       <v-btn to="/" stacked>
         <v-icon>mdi-home</v-icon>
